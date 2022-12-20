@@ -3,6 +3,9 @@ parameters:
   type: string # data type of the parameter; required
   default: ''
 
+pool:
+  vmImage: ubuntu-latest
+
 steps:
 - task: Docker@2
   inputs:
