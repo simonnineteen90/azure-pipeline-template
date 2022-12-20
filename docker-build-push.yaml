@@ -1,0 +1,15 @@
+parameters:
+- name: dockerRepo # name of the parameter; required
+  type: string # data type of the parameter; required
+  default: ''
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker hub'
+    repository: ${{ parameters.dockerRepo }}
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
