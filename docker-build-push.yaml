@@ -3,16 +3,19 @@ parameters:
   type: string # data type of the parameter; required
   default: ''
 
-pool:
-  vmImage: ubuntu-latest
+jobs:
+- job: Build
 
-steps:
-- task: Docker@2
-  inputs:
-    containerRegistry: 'docker hub'
-    repository: ${{ parameters.dockerRepo }}
-    command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
-    tags: |
-      $(Build.BuildId)
-      latest
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker hub'
+      repository: ${{ parameters.dockerRepo }}
+      command: 'buildAndPush'
+      Dockerfile: 'Dockerfile'
+      tags: |
+        $(Build.BuildId)
+        latest
